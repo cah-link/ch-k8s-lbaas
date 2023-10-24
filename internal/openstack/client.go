@@ -64,9 +64,11 @@ type Config struct {
 }
 
 type OpenStackClient struct {
-	provider  *gophercloud.ProviderClient
-	region    string
-	projectID string
+	provider        *gophercloud.ProviderClient
+	region          string
+	projectID       string
+	projectName     string
+	projectDomainID string
 }
 
 func (cfg AuthOpts) ToAuthOptions() gophercloud.AuthOptions {
@@ -145,9 +147,10 @@ func NewClient(cfg *AuthOpts) (*OpenStackClient, error) {
 	}
 
 	return &OpenStackClient{
-		provider:  provider,
-		region:    cfg.Region,
-		projectID: cfg.ProjectID,
+		provider:        provider,
+		region:          cfg.Region,
+		projectName:     cfg.ProjectName,
+		projectDomainID: cfg.ProjectDomainID,
 	}, nil
 }
 
